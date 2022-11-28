@@ -1,0 +1,24 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <h1>BusterBlock</h1>
+    <p class="lead">The video store rental system to support all of your business's needs.</p>
+    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <h2>Manage Rentals</h2>
+        @Html.ActionLink("New Rental", "New", "Rentals", null, new { @class = "btn btn-success" })
+    </div>
+    <div class="col-md-4">
+        <h2>Manage Customers</h2>
+        @Html.ActionLink("New Customer +", "NewCustomer", "Customer", null, new { @class = "btn btn-success" })
+    </div>
+    <div class="col-md-4">
+        <h2>Manage Movies</h2>
+        @Html.ActionLink("New Movie +", "NewMovie", "Movie", null, new { @class = "btn btn-success" })
+    </div>
+</div>
