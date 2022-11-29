@@ -6,14 +6,8 @@ using System.Web.Mvc;
 
 namespace BusterBlock.Controllers
 {
-    public class CustomerController : Controller
+    public class CustomerController : BaseController
     {
-
-        #region Fields
-
-        private ApplicationDbContext _context;
-
-        #endregion
 
         #region Actions
 
@@ -112,25 +106,6 @@ namespace BusterBlock.Controllers
 
         #endregion
 
-        #region Overrides
-
-        protected override void Dispose(bool disposing)
-        {
-            _context.Dispose();
-
-            base.Dispose(disposing);
-        }
-
-        #endregion
-
-        #region Constructor
-
-        public CustomerController()
-        {
-            _context = new ApplicationDbContext();
-        }
-
-        #endregion
 
     }
 }

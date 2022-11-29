@@ -7,14 +7,8 @@ using System.Web.Mvc;
 
 namespace BusterBlock.Controllers
 {
-    public class MovieController : Controller
+    public class MovieController : BaseController
     {
-
-        #region Fields
-
-        private ApplicationDbContext _context;
-
-        #endregion
 
         #region Actions
 
@@ -89,26 +83,6 @@ namespace BusterBlock.Controllers
             _ = _context.SaveChanges();
 
             return View("Movies", movieListViewModel());
-        }
-
-        #endregion
-
-        #region Overrides
-
-        protected override void Dispose(bool disposing)
-        {
-            _context.Dispose();
-
-            base.Dispose(disposing);
-        }
-
-        #endregion
-
-        #region Constructor
-
-        public MovieController()
-        {
-            _context = new ApplicationDbContext();
         }
 
         #endregion
