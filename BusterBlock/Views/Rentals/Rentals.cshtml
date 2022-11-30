@@ -6,7 +6,7 @@
 
 <h2>Rentals @Html.ActionLink("+", "New", null, new { @class = "btn btn-success whiteText" })</h2>
 
-<table class="table table-bordered table-hover">
+<table id="rentals" class="table table-bordered table-hover">
     <thead>
         <tr>
             <th>
@@ -27,7 +27,7 @@
 
     </tbody>
 
-    @foreach (var rental in Model.Rentals)
+    @*@foreach (var rental in Model.Rentals)
     {
         <tr>
             <td>
@@ -43,6 +43,37 @@
                 @Html.ActionLink("Return", "Return", "Rentals", new { id = rental.Id }, new { @class = "btn btn-success"})
             </td>
         </tr>
-    }
+    }*@
 
 </table>
+
+@section scripts
+{
+
+<script>
+    $(document).ready(function () {
+        var table = $("#rentals").DataTable({
+            ajax: {
+                url: "api/rentals",
+                dataSrc: ""
+            },
+            columns: [
+                {
+                    data: "customer.name"
+                },
+                {
+                    data: "movie.name"
+                },
+                {
+                    data: "dateRented"
+                },
+                {
+                    data: "return"
+                }
+            ]
+        });
+    });
+
+</script>
+    
+}

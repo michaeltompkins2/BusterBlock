@@ -1,23 +1,17 @@
-﻿using BusterBlock.DTOs;
+﻿using AutoMapper;
+using BusterBlock.DTOs;
 using BusterBlock.Models;
-using System.Collections.Generic;
-using System.Linq;
-using System.Data.Entity;
 using System;
+using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
 using System.Net;
 using System.Web.Http;
-using AutoMapper;
 
 namespace BusterBlock.Controllers.Api
 {
-    public class CustomersController : ApiController
+    public class CustomersController : BaseApiController
     {
-
-        #region Fields
-
-        private ApplicationDbContext _context;
-
-        #endregion
 
         #region Actions
 
@@ -124,15 +118,6 @@ namespace BusterBlock.Controllers.Api
         }
 
         #endregion
-
-        #endregion
-
-        #region Constructor
-
-        public CustomersController()
-        {
-            _context = new ApplicationDbContext();
-        }
 
         #endregion
 

@@ -15,6 +15,8 @@ namespace BusterBlock.App_Start
             Mapper.CreateMap<MovieDTO, Movie>();
             Mapper.CreateMap<MembershipType, MembershipTypeDTO>();
             Mapper.CreateMap<Genre, GenreDTO>();
+            Mapper.CreateMap<Rental, RentalDTO>();
+            Mapper.CreateMap<RentalDTO, Rental>();
         }
 
     }

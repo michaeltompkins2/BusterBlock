@@ -196,6 +196,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\Abstract\BaseController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\Api\Abstract\BaseApiController.cs" />
     <Compile Include="Controllers\Api\CustomersController.cs" />
     <Compile Include="Controllers\Api\MoviesController.cs" />
     <Compile Include="Controllers\Api\NewRentalController.cs" />
@@ -209,6 +210,7 @@
     <Compile Include="DTOs\MembershipTypeDTO.cs" />
     <Compile Include="DTOs\MovieDTO.cs" />
     <Compile Include="DTOs\NewRentalDTO.cs" />
+    <Compile Include="DTOs\RentalDTO.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

@@ -1,21 +1,27 @@
-﻿using BusterBlock.DTOs;
+﻿using AutoMapper;
+using BusterBlock.DTOs;
 using BusterBlock.Models;
 using System;
+using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web.Http;
 
 namespace BusterBlock.Controllers.Api
 {
-    public class NewRentalController : ApiController
+    public class NewRentalController : BaseApiController
     {
 
-        #region Fields
+        #region Actions
 
-        private ApplicationDbContext _context;
+        #region Rentals
+
+        [HttpGet]
+        public IEnumerable<RentalDTO> Rentals() => _context.Rentals.Include(r => r.Customer).Include(r => r.Movie).ToList().Select(Mapper.Map<Rental, RentalDTO>);
 
         #endregion
 
-        #region Actions
+        #region CreateNewRental
 
         [HttpPost]
         public IHttpActionResult CreateNewRental(NewRentalDTO newRentalDTO)
@@ -51,12 +57,26 @@ namespace BusterBlock.Controllers.Api
 
         #endregion
 
-        #region Constructor
+        #region RentalReturn
 
-        public NewRentalController()
+        [HttpPut]
+        public IHttpActionResult RentalReturn(int id)
         {
-            _context = new ApplicationDbContext();
+            var rental = _context.Rentals.SingleOrDefault(r => r.Id == id);
+
+            if (rental == null)
+            {
+                return BadRequest("Rental does not exist within the system.");
+            }
+
+            rental.DateReturned = DateTime.Now;
+
+            _context.SaveChanges();
+
+            return Ok();
         }
+
+        #endregion
 
         #endregion
 

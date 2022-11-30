@@ -10,14 +10,8 @@ using System.Web.Http;
 
 namespace BusterBlock.Controllers.Api
 {
-    public class MoviesController : ApiController
+    public class MoviesController : BaseApiController
     {
-
-        #region Fields
-
-        private ApplicationDbContext _context;
-
-        #endregion
 
         #region Actions
 
@@ -117,15 +111,6 @@ namespace BusterBlock.Controllers.Api
         }
 
         #endregion
-
-        #endregion
-
-        #region Constructor
-
-        public MoviesController()
-        {
-            _context = new ApplicationDbContext();
-        }
 
         #endregion
 
