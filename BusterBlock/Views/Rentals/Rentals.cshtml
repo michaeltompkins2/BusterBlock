@@ -40,7 +40,7 @@
                 @rental.DateRented
             </td>
             <td>
-                @Html.ActionLink("Return", "Return", null, new { @class = "btn btn-success"})
+                @Html.ActionLink("Return", "Return", "Rentals", new { id = rental.Id }, new { @class = "btn btn-success"})
             </td>
         </tr>
     }
