@@ -24,27 +24,7 @@
         </tr>
     </thead>
     <tbody>
-
     </tbody>
-
-    @*@foreach (var rental in Model.Rentals)
-    {
-        <tr>
-            <td>
-               @rental.Customer.Name
-            </td>
-            <td>
-                @rental.Movie.Name
-            </td>
-            <td>
-                @rental.DateRented
-            </td>
-            <td>
-                @Html.ActionLink("Return", "Return", "Rentals", new { id = rental.Id }, new { @class = "btn btn-success"})
-            </td>
-        </tr>
-    }*@
-
 </table>
 
 @section scripts
@@ -54,7 +34,7 @@
     $(document).ready(function () {
         var table = $("#rentals").DataTable({
             ajax: {
-                url: "api/rentals",
+                url: "/api/rentals",
                 dataSrc: ""
             },
             columns: [
@@ -65,15 +45,31 @@
                     data: "movie.name"
                 },
                 {
-                    data: "dateRented"
+                    data: "dateRented",
+                    render: function (data) {
+                        return data.substring(0, 10)
+                    }
                 },
                 {
-                    data: "return"
+                    data: "dateReturned",
+                    render: function (data, type, rental) {
+                        if (data) { return data.substring(0, 10) }
+                        else { return "<a class = 'btn btn-success js-return-rental' data-rental-id='" + rental.id + "'>Return</a>"; }
+                    }
                 }
             ]
         });
     });
 
+    $("#rentals").on("click", ".js-return-rental", function () {
+        $.ajax({
+            url: "/api/rentals/" + $(this).attr("data-rental-id"),
+            method: "PUT",
+            success: function () {
+                location.reload();
+            }
+        });
+    });
+
 </script>
-    
 }

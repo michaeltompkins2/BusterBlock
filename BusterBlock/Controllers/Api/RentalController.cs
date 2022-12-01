@@ -9,7 +9,7 @@ using System.Web.Http;
 
 namespace BusterBlock.Controllers.Api
 {
-    public class NewRentalController : BaseApiController
+    public class RentalsController : BaseApiController
     {
 
         #region Actions
