@@ -577,6 +577,7 @@
     <Content Include="Views\Movie\ReadOnlyMovies.cshtml" />
     <Content Include="Views\Rentals\New.cshtml" />
     <Content Include="Views\Rentals\Rentals.cshtml" />
+    <Content Include="Views\Rentals\OutstandingRentalsByCustomer.cshtml" />
     <None Include="Web.Testing.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

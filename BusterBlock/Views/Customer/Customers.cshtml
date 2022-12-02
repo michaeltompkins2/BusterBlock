@@ -17,25 +17,12 @@
             <th>
                 Delete
             </th>
+            <th>
+                Returns
+            </th>
         </tr>
     </thead>
     <tbody>
-
-        @*Rendering data client side through customer API*@
-        @*@foreach (var customer in Model.CustomerList)
-        {
-            <tr>
-                <td>
-                    @Html.ActionLink(customer.Name, "Edit", "Customer", new { id = customer.Id }, null)
-                </td>
-                <td>
-                    @customer.MembershipType.Name
-                </td>
-                <td>
-                    <button data-customer-id="@customer.Id" class="btn-link js-delete">Delete</button>
-                </td>
-            </tr>
-        }*@
     </tbody>
 </table>
 
@@ -64,6 +51,13 @@
                         render: function (data) {
                             return "<button class='btn btn-danger link js-delete' data-customer-id='" + data +"'>Delete</button>";
                         }
+                    },
+                    {
+                        data: "id",
+                        render: function (data)
+                        {
+                            return "<button class='btn btn-success link js-rental-return' data-customer-id='" + data + "'>Return Rentals</button>";
+                        }
                     }
                 ]
             }
@@ -86,6 +80,10 @@
                 })
 
             })
+
+            $("#customers").on("click", ".js-rental-return", function () {
+                window.location.href = "../rentals/OutstandingRentalsByCustomer/" + $(this).attr("data-customer-id");
+            });
         });
     </script>    
 }

@@ -1,17 +1,14 @@
-﻿@model BusterBlock.ViewModels.RentalListViewModel
+﻿@model BusterBlock.Models.Customer
 @{
-    ViewBag.Title = "Rentals";
+    ViewBag.Title = "OutstandingRentalsByCustomer";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Rentals @Html.ActionLink("+", "New", null, new { @class = "btn btn-success whiteText" })</h2>
+<h2>Outstanding Rentals for @Model.Name</h2>
 
-<table id="rentals" class="table table-bordered table-hover">
+<table id="rentals" data-id="@Model.Id"  class="table table-bordered table-hover">
     <thead>
         <tr>
-            <th>
-                Customer
-            </th>
             <th>
                 Movie
             </th>
@@ -30,17 +27,14 @@
 @section scripts
 {
 
-<script>
+    <script>
     $(document).ready(function () {
         var table = $("#rentals").DataTable({
             ajax: {
-                url: "/api/rentals",
+                url: "/api/rentals?id=" + table.attr("data-id"),
                 dataSrc: ""
             },
             columns: [
-                {
-                    data: "customer.name"
-                },
                 {
                     data: "movie.name"
                 },
@@ -53,8 +47,12 @@
                 {
                     data: "dateReturned",
                     render: function (data, type, rental) {
-                        if (data) { return data.substring(0, 10) }
-                        else { return "<a class = 'btn btn-success js-return-rental' data-rental-id='" + rental.id + "'>Return</a>"; }
+                        if (data) {
+                            return data.substring(0, 10)
+                        }
+                        else {
+                            return "<a class = 'btn btn-success js-return-rental' data-rental-id='" + rental.id + "'>Return</a>";
+                        }
                     }
                 }
             ]
@@ -66,10 +64,10 @@
             url: "/api/rentals/" + $(this).attr("data-rental-id"),
             method: "PUT",
             success: function () {
-                $(this).removeClass("btn");
+                location.reload();
             }
         });
     });
 
-</script>
+    </script>
 }

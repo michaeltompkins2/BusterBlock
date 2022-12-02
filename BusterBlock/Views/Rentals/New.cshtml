@@ -69,7 +69,7 @@
             });
 
             $('#movie').typeahead({
-                minLength: 1,
+                minLength: 3,
                 highlight: true
             }, {
                 name: 'movies',
@@ -82,19 +82,10 @@
                 vm.movieIds.push(movie.id);
             });
 
-
-            var validator = $.validator.addMethod("validCustomer", function () {
-                return vm.customer && vm.customerId !== 0;
-            }, "Please select an existing customer.");
-
-            $.validator.addMethod("atLeastOneMovie", function () {
-                return vm.movieIds.length > 0;
-            }, "You must select at least on movie to rent.");
-
             $("#newRental").validate({
                 submitHandler: function () {
                     $.ajax({
-                        url: "/api/newRental",
+                        url: "/api/rentals",
                         method: "post",
                         data: vm
                     })

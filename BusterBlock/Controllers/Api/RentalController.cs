@@ -21,6 +21,16 @@ namespace BusterBlock.Controllers.Api
 
         #endregion
 
+        #region OutstandingRentalsByCustomer
+
+        [HttpGet]
+        public IEnumerable<RentalDTO> OutstandingRentalsByCustomer(int customerID)
+        {
+            return _context.Rentals.Include(r => r.Movie).Where(r => r.Customer.Id == customerID).ToList().Select(Mapper.Map<Rental, RentalDTO>);
+        }
+
+        #endregion
+
         #region CreateNewRental
 
         [HttpPost]
