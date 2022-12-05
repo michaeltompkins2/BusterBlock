@@ -2,6 +2,7 @@
 using System;
 using System.Data.Entity;
 using System.Linq;
+using System.Web;
 using System.Web.Mvc;
 
 namespace BusterBlock.Controllers
@@ -11,10 +12,16 @@ namespace BusterBlock.Controllers
 
         #region Actions
 
+        #region New
+
         public ActionResult New()
         {
             return View();
         }
+
+        #endregion
+
+        #region Rentals
 
         public ActionResult Rentals()
         {
@@ -26,24 +33,38 @@ namespace BusterBlock.Controllers
             return View(rentalListViewModel);
         }
 
+        #endregion
+
+        #region Return
+
         public ActionResult Return(int id)
         {
-            var rental = _context.Rentals.SingleOrDefault(r => r.Id == id);
-
-            if (rental == null)
-            {
-                return HttpNotFound();
-            }
-
-            rental.DateReturned = DateTime.Now;
+            returnRental(id);
 
             _context.SaveChanges();
 
-            return View("Rentals", new RentalListViewModel
-            (
-                _context.Rentals.Include(r => r.Movie).Include(r => r.Customer).Where(r => r.DateReturned == null)
-            ));
+            return RedirectToAction("Rentals", model());
         }
+
+        #endregion
+
+        #region ReturnAll
+
+        public ActionResult ReturnAll(int id)
+        {
+            foreach (var rental in _context.Rentals.Where(r => r.Customer.Id == id).ToList())
+            {
+                returnRental(rental.Id);
+            }
+
+            _context.SaveChanges();
+
+            return RedirectToAction("OutstandingRentalsByCustomer", id);
+        }
+
+        #endregion
+
+        #region OutstandingRentalsByCustomer
 
         public ActionResult OutstandingRentalsByCustomer(int id)
         {
@@ -56,6 +77,46 @@ namespace BusterBlock.Controllers
 
             return View(customer);
         }
+
+        #endregion
+
+        #endregion
+
+        #region Methods
+
+        #region returnRental
+
+        private void returnRental(int rentalId)
+        {
+            var rental = _context.Rentals.Include(r => r.Movie).SingleOrDefault(r => r.Id == rentalId);
+
+            if (rental == null)
+            {
+                throw new HttpException(404, "Rental is not found within the system.");
+            }
+
+            rental.DateReturned = DateTime.Now;
+
+            var movie = _context.Movies.SingleOrDefault(m => m.Id == rental.Movie.Id);
+
+            if (movie == null)
+            {
+                throw new HttpException(404, "Movie is no longer within the system.");
+            }
+
+            movie.AvailableStock += 1;
+        }
+
+        #endregion
+
+        #region model
+
+        private RentalListViewModel model() => new RentalListViewModel
+        (
+            _context.Rentals.Include(r => r.Movie).Include(r => r.Customer).Where(r => r.DateReturned == null)
+        );
+
+        #endregion
 
         #endregion
 

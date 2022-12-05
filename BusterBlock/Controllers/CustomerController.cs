@@ -13,19 +13,7 @@ namespace BusterBlock.Controllers
 
         #region Customers
 
-        public ActionResult Customers()
-        {
-            // Getting customers client side using API.
-            //CustomerListViewModel viewListModel = new CustomerListViewModel();
-
-            //foreach (Customer customer in _context.Customers.Include(c => c.MembershipType))
-            //{
-            //    viewListModel.CustomerList.Add(customer);
-            //}
-
-            //  return View(viewListModel);
-            return View();
-        }
+        public ActionResult Customers() => View();
 
         #endregion
 

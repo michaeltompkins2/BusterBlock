@@ -56,12 +56,12 @@ namespace BusterBlock.Controllers
         {
             Movie movie = viewModel.Movie;
 
-            if (!ModelState.IsValid)
-            {
-                viewModel.Genres = _context.Genres.ToList();
+            //if (!ModelState.IsValid)
+            //{
+            //    viewModel.Genres = _context.Genres.ToList();
 
-                return View("MoviesForm", viewModel);
-            }
+            //    return View("MoviesForm", viewModel);
+            //}
 
             if (movie.Id != 0)
             {
@@ -77,12 +77,15 @@ namespace BusterBlock.Controllers
             }
             else
             {
+                movie.DateAdded = DateTime.Now;
+                movie.AvailableStock = movie.StockCount;
+
                 _context.Movies.Add(movie);
             }
 
-            _ = _context.SaveChanges();
+            _ =_context.SaveChanges();
 
-            return View("Movies", movieListViewModel());
+            return RedirectToAction("Movies", movieListViewModel());
         }
 
         #endregion

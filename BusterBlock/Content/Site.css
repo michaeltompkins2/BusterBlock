@@ -45,3 +45,9 @@ label.error {
 input.error {
     border: 2px solid red;
 }
+
+.mb10 {
+
+    margin-bottom: 10px;
+
+}

@@ -32,17 +32,23 @@
 
 <script>
     $(document).ready(function () {
-        var table = $("#rentals").DataTable({
+        $("#rentals").DataTable({
             ajax: {
                 url: "/api/rentals",
                 dataSrc: ""
             },
             columns: [
                 {
-                    data: "customer.name"
+                    data: "customer.name",
+                    render: function (data, type, rental) {
+                        return "<a href='../Customer/Edit/" + rental.customer.id + "'>" + data + "</a>";
+                    }
                 },
                 {
-                    data: "movie.name"
+                    data: "movie.name",
+                    render: function (data, type, rental) {
+                        return "<a href='../Movie/Edit/" + rental.movie.id + "'>" + data + "</a>";
+                    }
                 },
                 {
                     data: "dateRented",

@@ -17,16 +17,16 @@ namespace BusterBlock.Controllers.Api
         #region Rentals
 
         [HttpGet]
-        public IEnumerable<RentalDTO> Rentals() => _context.Rentals.Include(r => r.Customer).Include(r => r.Movie).ToList().Select(Mapper.Map<Rental, RentalDTO>);
-
-        #endregion
-
-        #region OutstandingRentalsByCustomer
-
-        [HttpGet]
-        public IEnumerable<RentalDTO> OutstandingRentalsByCustomer(int customerID)
+        public IEnumerable<RentalDTO> Rentals(int id = 0)
         {
-            return _context.Rentals.Include(r => r.Movie).Where(r => r.Customer.Id == customerID).ToList().Select(Mapper.Map<Rental, RentalDTO>);
+            var query = _context.Rentals.Include(r => r.Customer).Include(r => r.Movie);
+
+            if (id != 0)
+            {
+                query = query.Where(r => r.Customer.Id == id && r.DateReturned == null);
+            }
+
+            return query.ToList().Select(Mapper.Map<Rental, RentalDTO>);
         }
 
         #endregion
@@ -76,7 +76,7 @@ namespace BusterBlock.Controllers.Api
 
             if (rental == null)
             {
-                return BadRequest("Rental does not exist within the system.");
+                return NotFound();
             }
 
             rental.DateReturned = DateTime.Now;

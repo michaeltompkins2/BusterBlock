@@ -4,9 +4,11 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Outstanding Rentals for @Model.Name</h2>
+<h2 id="header" data-id="@Model.Id">Outstanding Rentals for @Model.Name</h2>
 
-<table id="rentals" data-id="@Model.Id"  class="table table-bordered table-hover">
+@Html.ActionLink("Return All", "ReturnAll", new {Id = Model.Id }, new { @class = "btn btn-success mb10" })
+
+<table id="rentals" class="table table-bordered table-hover">
     <thead>
         <tr>
             <th>
@@ -31,12 +33,15 @@
     $(document).ready(function () {
         var table = $("#rentals").DataTable({
             ajax: {
-                url: "/api/rentals?id=" + table.attr("data-id"),
+                url: "/api/rentals/" + $("#header").attr("data-id"),
                 dataSrc: ""
             },
             columns: [
                 {
-                    data: "movie.name"
+                    data: "movie.name",
+                    render: function (data, type, rental) {
+                        return "<a href='../../Movie/Edit/" + rental.movie.id + "'>" + data + "</a>";
+                    }
                 },
                 {
                     data: "dateRented",
