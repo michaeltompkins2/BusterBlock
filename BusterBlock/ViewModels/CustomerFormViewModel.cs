@@ -18,5 +18,9 @@ namespace BusterBlock.Models
             MembershipTypes = membershipTypes;
         }
 
+        public CustomerFormViewModel()
+        {
+        }
+
     }
 }

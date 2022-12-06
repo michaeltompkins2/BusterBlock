@@ -74,6 +74,9 @@
                             method: "DELETE",
                             success: function () {
                                 table.row(button.parents("tr")).remove().draw();
+                            },
+                            error: function (xhr) {
+                                toastr.error(JSON.parse(xhr.responseText).message);
                             }
                         })
                     }

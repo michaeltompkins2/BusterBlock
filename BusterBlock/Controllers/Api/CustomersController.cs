@@ -101,20 +101,24 @@ namespace BusterBlock.Controllers.Api
         #region DeleteCustomer
 
         [HttpDelete]
-        public void DeleteCustomer(int id)
+        public IHttpActionResult DeleteCustomer(int id)
         {
             Customer existingCustomer = _context.Customers.SingleOrDefault(c => c.Id == id);
 
             if (existingCustomer == null)
             {
-                throw new HttpResponseException(HttpStatusCode.NotFound);
+                return NotFound();
             }
-            else 
+            else if (_context.Rentals.SingleOrDefault(r => r.Customer.Id == id && r.DateReturned == null) != null)
             {
-                _context.Customers.Remove(existingCustomer);
-
-                _context.SaveChanges();
+                return BadRequest("The Customer cannot be deleted because they have a rental(s) that has not yet been returned.");
             }
+
+            _context.Customers.Remove(existingCustomer);
+
+            _context.SaveChanges();
+
+            return Ok();
         }
 
         #endregion

@@ -59,7 +59,7 @@ namespace BusterBlock.Controllers
 
             _context.SaveChanges();
 
-            return RedirectToAction("OutstandingRentalsByCustomer", id);
+            return RedirectToAction("OutstandingRentalsByCustomer", _context.Customers.SingleOrDefault(c => c.Id == id));
         }
 
         #endregion

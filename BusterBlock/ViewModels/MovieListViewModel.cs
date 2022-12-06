@@ -14,5 +14,9 @@ namespace BusterBlock.ViewModels
         {
             movies = context.Movies.Include(m => m.Genre).ToList();
         }
+
+        public MovieListViewModel()
+        {
+        }
     }
 }

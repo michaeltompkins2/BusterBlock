@@ -64,9 +64,7 @@ namespace BusterBlock.Controllers
                 existingCustomer.Name = customer.Name;
                 existingCustomer.BirthDate = customer.BirthDate;
                 existingCustomer.IsSubscribedToNewsletter = customer.IsSubscribedToNewsletter;
-                existingCustomer.MembershipTypeId = customer.MembershipTypeId;
-                
-                //TryUpdateModel(existingCustomer);
+                existingCustomer.MembershipTypeId = customer.MembershipTypeId;                
             }
 
             _ =_context.SaveChanges();
