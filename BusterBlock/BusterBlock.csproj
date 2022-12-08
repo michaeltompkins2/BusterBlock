@@ -315,6 +315,7 @@
     <Compile Include="ViewModels\CustomerListViewModel.cs" />
     <Compile Include="ViewModels\MovieFormViewModel.cs" />
     <Compile Include="ViewModels\MovieListViewModel.cs" />
+    <Compile Include="ViewModels\RentalByCustomerViewModel.cs" />
     <Compile Include="ViewModels\RentalListViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -577,7 +578,7 @@
     <Content Include="Views\Movie\ReadOnlyMovies.cshtml" />
     <Content Include="Views\Rentals\New.cshtml" />
     <Content Include="Views\Rentals\Rentals.cshtml" />
-    <Content Include="Views\Rentals\OutstandingRentalsByCustomer.cshtml" />
+    <Content Include="Views\Rentals\RentalsByCustomer.cshtml" />
     <None Include="Web.Testing.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

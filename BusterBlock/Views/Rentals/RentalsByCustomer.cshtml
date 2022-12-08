@@ -1,12 +1,12 @@
-﻿@model BusterBlock.Models.Customer
+﻿@model BusterBlock.ViewModels.RentalByCustomerViewModel
 @{
-    ViewBag.Title = "OutstandingRentalsByCustomer";
+    ViewBag.Title = "RentalsByCustomer";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2 id="header" data-id="@Model.Id">Outstanding Rentals for @Model.Name</h2>
+<h2 id="header" data-id="@Model.Customer.Id" data-historical="@Model.Historical">Rentals for @Model.Customer.Name</h2>
 
-@Html.ActionLink("Return All", "ReturnAll", new {Id = Model.Id }, new { @class = "btn btn-success mb10" })
+@Html.ActionLink("Return All", "ReturnAll", new {Id = Model.Customer.Id }, new { @class = "btn btn-success mb10" })
 
 <table id="rentals" class="table table-bordered table-hover">
     <thead>
@@ -30,10 +30,13 @@
 {
 
     <script>
-    $(document).ready(function () {
-        var table = $("#rentals").DataTable({
+        $(document).ready(function () {           
+
+        var action = $("#header").attr("data-historical") == "True" ? "rentalHistoryByCustomer/" : "rentals/";
+
+        $("#rentals").DataTable({
             ajax: {
-                url: "/api/rentals/" + $("#header").attr("data-id"),
+                url: "/api/rentals/" + action + $("#header").attr("data-id"),
                 dataSrc: ""
             },
             columns: [

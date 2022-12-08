@@ -59,24 +59,20 @@ namespace BusterBlock.Controllers
 
             _context.SaveChanges();
 
-            return RedirectToAction("OutstandingRentalsByCustomer", _context.Customers.SingleOrDefault(c => c.Id == id));
+            return RedirectToAction("RentalsByCustomer", _context.Customers.SingleOrDefault(c => c.Id == id));
         }
 
         #endregion
 
         #region OutstandingRentalsByCustomer
 
-        public ActionResult OutstandingRentalsByCustomer(int id)
-        {
-            var customer =_context.Customers.SingleOrDefault(c => c.Id == id);
+        public ActionResult OutstandingRentalsByCustomer(int id) => returnRentalsView(id);
 
-            if (customer == null)
-            {
-                return HttpNotFound();
-            }
+        #endregion
 
-            return View(customer);
-        }
+        #region RentalsByCustomer
+
+        public ActionResult RentalsByCustomer(int id) => returnRentalsView(id, true);
 
         #endregion
 
@@ -105,6 +101,22 @@ namespace BusterBlock.Controllers
             }
 
             movie.AvailableStock += 1;
+        }
+
+        #endregion
+
+        #region returnRentalsView
+
+        private ActionResult returnRentalsView(int id, bool historical = false)
+        {
+            var customer = _context.Customers.SingleOrDefault(c => c.Id == id);
+
+            if (customer == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View("RentalsByCustomer", new RentalByCustomerViewModel() { Customer = customer, Historical = historical });
         }
 
         #endregion

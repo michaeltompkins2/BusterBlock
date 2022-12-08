@@ -31,6 +31,13 @@ namespace BusterBlock.Controllers.Api
 
         #endregion
 
+        #region RentalHistoryByCustomer
+
+        [HttpGet]
+        public IEnumerable<RentalDTO> RentalHistoryByCustomer(int id) =>_context.Rentals.Include(r => r.Customer).Include(r => r.Movie).Where(r => r.Customer.Id == id && r.DateReturned != null).ToList().Select(Mapper.Map<Rental, RentalDTO>);
+
+        #endregion
+
         #region CreateNewRental
 
         [HttpPost]
