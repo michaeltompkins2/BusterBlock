@@ -30,6 +30,9 @@ namespace BusterBlock.Models
         public DbSet<MembershipType> MembershipTypes { get; set; }
         public DbSet<Genre> Genres { get; set; }
         public DbSet<Rental> Rentals { get; set; }
+        public DbSet<Account> Accounts { get; set; }
+        public DbSet<ARDocument> ARDocuments { get; set; }
+
 
 
         public ApplicationDbContext()

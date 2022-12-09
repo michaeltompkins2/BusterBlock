@@ -298,8 +298,14 @@
     <Compile Include="Migrations\202211262018416_AddNumberAvailableToMovies.Designer.cs">
       <DependentUpon>202211262018416_AddNumberAvailableToMovies.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202212090215195_AddARDocumentAndAccountModels.cs" />
+    <Compile Include="Migrations\202212090215195_AddARDocumentAndAccountModels.Designer.cs">
+      <DependentUpon>202212090215195_AddARDocumentAndAccountModels.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Account.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\ARDocument.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\Genre.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -308,6 +314,7 @@
     <Compile Include="Models\Min18YearsIfAMember.cs" />
     <Compile Include="Models\Movie.cs" />
     <Compile Include="Models\Rental.cs" />
+    <Compile Include="Utility\StringReference\ARDocStrings.cs" />
     <Compile Include="Utility\StringReference\UserRoles.cs" />
     <Compile Include="ViewModels\CustomerFormViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -662,6 +669,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202211262018416_AddNumberAvailableToMovies.resx">
       <DependentUpon>202211262018416_AddNumberAvailableToMovies.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202212090215195_AddARDocumentAndAccountModels.resx">
+      <DependentUpon>202212090215195_AddARDocumentAndAccountModels.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

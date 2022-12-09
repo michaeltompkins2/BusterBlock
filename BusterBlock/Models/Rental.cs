@@ -19,5 +19,9 @@ namespace BusterBlock.Models
         public DateTime DateRented { get; set; }
         public DateTime? DateReturned { get; set; }
 
+        public string DocRefNbr { get; set; }
+
+        public bool Paid { get; set; }
+
     }
 }
