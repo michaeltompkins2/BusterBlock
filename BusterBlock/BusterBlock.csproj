@@ -51,6 +51,12 @@
     <Reference Include="Elmah, Version=1.2.14706.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\elmah.corelibrary.1.2.2\lib\Elmah.dll</HintPath>
     </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Glimpse.Ado, Version=1.7.3.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Glimpse.Ado.1.7.3\lib\net45\Glimpse.Ado.dll</HintPath>
     </Reference>
@@ -137,12 +143,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="EntityFramework">
-      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
-    </Reference>
-    <Reference Include="EntityFramework.SqlServer">
-      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.AspNet.Identity.Core">
       <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.3\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
     </Reference>
@@ -196,10 +196,12 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\Abstract\BaseController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AccountsController.cs" />
     <Compile Include="Controllers\Api\Abstract\BaseApiController.cs" />
     <Compile Include="Controllers\Api\CustomersController.cs" />
     <Compile Include="Controllers\Api\MoviesController.cs" />
     <Compile Include="Controllers\Api\RentalsController.cs" />
+    <Compile Include="Controllers\ARDocumentEntryController.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -301,6 +303,18 @@
     <Compile Include="Migrations\202212090215195_AddARDocumentAndAccountModels.cs" />
     <Compile Include="Migrations\202212090215195_AddARDocumentAndAccountModels.Designer.cs">
       <DependentUpon>202212090215195_AddARDocumentAndAccountModels.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202212102317544_Add-AmountToAR.cs" />
+    <Compile Include="Migrations\202212102317544_Add-AmountToAR.Designer.cs">
+      <DependentUpon>202212102317544_Add-AmountToAR.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202212112104517_AddCustomerToAccount.cs" />
+    <Compile Include="Migrations\202212112104517_AddCustomerToAccount.Designer.cs">
+      <DependentUpon>202212112104517_AddCustomerToAccount.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202212112142163_AddCreditCardToAccount.cs" />
+    <Compile Include="Migrations\202212112142163_AddCreditCardToAccount.Designer.cs">
+      <DependentUpon>202212112142163_AddCreditCardToAccount.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Account.cs" />
@@ -586,6 +600,9 @@
     <Content Include="Views\Rentals\New.cshtml" />
     <Content Include="Views\Rentals\Rentals.cshtml" />
     <Content Include="Views\Rentals\RentalsByCustomer.cshtml" />
+    <Content Include="Views\ARDocumentEntry\ARDocumentEntry.cshtml" />
+    <Content Include="Views\Accounts\CustomerAccounts.cshtml" />
+    <Content Include="Views\Accounts\AccountsForm.cshtml" />
     <None Include="Web.Testing.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -672,6 +689,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202212090215195_AddARDocumentAndAccountModels.resx">
       <DependentUpon>202212090215195_AddARDocumentAndAccountModels.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202212102317544_Add-AmountToAR.resx">
+      <DependentUpon>202212102317544_Add-AmountToAR.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202212112104517_AddCustomerToAccount.resx">
+      <DependentUpon>202212112104517_AddCustomerToAccount.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202212112142163_AddCreditCardToAccount.resx">
+      <DependentUpon>202212112142163_AddCreditCardToAccount.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
