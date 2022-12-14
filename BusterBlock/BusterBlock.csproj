@@ -198,15 +198,16 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AccountsController.cs" />
     <Compile Include="Controllers\Api\Abstract\BaseApiController.cs" />
+    <Compile Include="Controllers\Api\AccountsController.cs" />
     <Compile Include="Controllers\Api\CustomersController.cs" />
     <Compile Include="Controllers\Api\MoviesController.cs" />
     <Compile Include="Controllers\Api\RentalsController.cs" />
-    <Compile Include="Controllers\ARDocumentEntryController.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MovieController.cs" />
     <Compile Include="Controllers\RentalsController.cs" />
+    <Compile Include="DTOs\AccountDTO.cs" />
     <Compile Include="DTOs\CustomerDTO.cs" />
     <Compile Include="DTOs\GenreDTO.cs" />
     <Compile Include="DTOs\MembershipTypeDTO.cs" />
@@ -601,7 +602,7 @@
     <Content Include="Views\Rentals\Rentals.cshtml" />
     <Content Include="Views\Rentals\RentalsByCustomer.cshtml" />
     <Content Include="Views\ARDocumentEntry\ARDocumentEntry.cshtml" />
-    <Content Include="Views\Accounts\CustomerAccounts.cshtml" />
+    <Content Include="Views\Accounts\AccountsByCustomer.cshtml" />
     <Content Include="Views\Accounts\AccountsForm.cshtml" />
     <None Include="Web.Testing.config">
       <DependentUpon>Web.config</DependentUpon>

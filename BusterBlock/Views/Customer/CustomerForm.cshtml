@@ -6,37 +6,109 @@
 
 <h2>Customer</h2>
 
-@using (Html.BeginForm("Save", "Customer"))
-{
-    <div class="form-group">
-        @Html.LabelFor(m => m.Customer.Name)
-        @Html.TextBoxFor(m => m.Customer.Name, new { @class = "form-control" })
-        @Html.ValidationMessageFor(m => m.Customer.Name)
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.Customer.MembershipTypeId)
-        @Html.DropDownListFor(m => m.Customer.MembershipTypeId, new SelectList(Model.MembershipTypes, "Id", "Name"), "Select Membership Type", new { @class = "form-control" })
-        @Html.ValidationMessageFor(m => m.Customer.MembershipTypeId)
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.Customer.BirthDate)
-        @Html.TextBoxFor(m => m.Customer.BirthDate, "{0:d MMM yyyy}", new { @class = "form-control" })
-        @Html.ValidationMessageFor(m => m.Customer.BirthDate)
-    </div>
-    <div class="checkbox">
-        <label>
-            @Html.CheckBoxFor(m => m.Customer.IsSubscribedToNewsletter, new { @type = "checkbox" })
-            Subscribed
-        </label>
-    </div>
-    @Html.HiddenFor(m => m.Customer.Id)
-    @Html.AntiForgeryToken()
-    <button type="submit" class="btn btn-primary">Save</button>
-    @Html.ActionLink("Rentals", "OutstandingRentalsByCustomer", "Rentals", new { Id = Model.Customer.Id }, new { @class = "btn btn-primary" })
-    @Html.ActionLink("History", "RentalsByCustomer", "Rentals", new { Id = Model.Customer.Id }, new { @class = "btn btn-primary" })
-}
+<div class="container">
+
+    @using (Html.BeginForm("Save", "Customer"))
+    {
+        <div class="form-group">
+            @Html.LabelFor(m => m.Customer.Name)
+            @Html.TextBoxFor(m => m.Customer.Name, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Customer.Name)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Customer.MembershipTypeId)
+            @Html.DropDownListFor(m => m.Customer.MembershipTypeId, new SelectList(Model.MembershipTypes, "Id", "Name"), "Select Membership Type", new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Customer.MembershipTypeId)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Customer.BirthDate)
+            @Html.TextBoxFor(m => m.Customer.BirthDate, "{0:d MMM yyyy}", new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Customer.BirthDate)
+        </div>
+        <div class="checkbox">
+            <label>
+                @Html.CheckBoxFor(m => m.Customer.IsSubscribedToNewsletter, new { @type = "checkbox" })
+                Subscribed
+            </label>
+        </div>
+        @Html.HiddenFor(m => m.Customer.Id)
+        @Html.AntiForgeryToken()
+        <button type="submit" class="btn btn-primary">Save</button>
+        @Html.ActionLink("Rentals", "OutstandingRentalsByCustomer", "Rentals", new { Id = Model.Customer.Id }, new { @class = "btn btn-primary", style = "margin-right: 2px" })
+        @Html.ActionLink("History", "RentalsByCustomer", "Rentals", new { Id = Model.Customer.Id }, new { @class = "btn btn-primary" })
+    }
+</div>
+
+<div style="margin-top: 20px">
+    <table id="accounts" class="table table-bordered table-hover" style="margin-top: 20px" data-customer-id="@Model.Customer.Id">
+        <thead>
+            <tr>
+                <th>
+                    Account Name
+                </th>
+                <th>
+                    Cash Account
+                </th>
+                <th>
+                    Payable
+                </th>
+                <th>
+                    Receivable
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</div>
+
 
 @section scripts
 {
     @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        var table = $("#accounts");
+
+        var s = table.attr("data-customer-id");
+
+        function checkbox(data) {
+
+            var checked = data ? "checked='true'" : "";
+
+            return "<input type='checkbox' disabled='true' " + checked + "'>";
+        }
+
+        table.DataTable({
+            ajax: {
+                url: "/api/accounts/accountsByCustomer/" + table.attr("data-customer-id"),
+                dataSrc: ""
+            },
+            columns: [
+                {
+                    data: "accountCD"
+                    // TODO: Add Link to Account form.
+                },
+                {
+                    data: "IsCashAccount",
+                    render: function (data) {
+                        return checkbox(data);
+                    }
+                },
+                {
+                    data: "payable",
+                    render: function (data) {
+                        return checkbox(data);
+                    }
+                },
+                {
+                    data: "receivable",
+                    render: function (data) {
+                        return checkbox(data);
+                    }
+                }
+            ]
+        });
+    </script>
+
 }
